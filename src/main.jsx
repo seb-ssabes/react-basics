@@ -1,3 +1,11 @@
-import ReactDOM from "react-dom/client"
+import { createRoot } from "react-dom/client"
 
-ReactDOM.createRoot(document.querySelector('#root')).render(<h1>Hola World</h1>)
+const root = createRoot(document.querySelector('#root'))
+
+root.render(
+  <ul>
+    <li>Become a competent dev</li>
+    <li>Build out of the ordinary web apps</li>
+    <li>Get paid while at it</li>
+  </ul>
+)
