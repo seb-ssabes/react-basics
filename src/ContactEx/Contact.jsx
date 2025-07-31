@@ -24,14 +24,3 @@ export default function Contact(props) {
     </article>
   )
 }
-
-const person = {
-  img: "./mr-whiskerson.png",
-  name: "Mr. Whiskerson",
-  phone: "(212) 555-1234",
-  email: "mr.whiskaz@catnap.meow"
-}
-
-const {img, name} = person
-
-console.log(img)
