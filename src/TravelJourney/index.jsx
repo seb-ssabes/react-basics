@@ -10,3 +10,12 @@ root.render(
     <MyJourney />
   </>
 )
+
+
+
+const pokemons = ["Bulbasaur", "Charmander", "Squirtle"]
+
+const pokemonHTML = pokemons.map(pokemon => `<p>${pokemon}</p>`)
+
+
+console.log(pokemonHTML)
