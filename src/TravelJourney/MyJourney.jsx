@@ -8,7 +8,7 @@ export default function MyJourney() {
     return (
       <Entry
           key={d.id}
-          entry={d}
+          {...d} // spread object as prop
       />
     )
   })
