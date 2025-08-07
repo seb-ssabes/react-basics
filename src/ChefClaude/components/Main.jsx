@@ -9,11 +9,8 @@ export default function Main() {
 
 
 
-  function handleSubmit(event) {
-    event.preventDefault()
-    const formData = new FormData(event.currentTarget)
+  function addItem(formData) {
     const newIngredient = formData.get("ingredient")
-
 
     setIngredients(
       prevIngredients => [
@@ -26,7 +23,7 @@ export default function Main() {
 
   return (
     <main>
-      <form onSubmit={handleSubmit} className="add-ingredient-form">
+      <form action={addItem} className="add-ingredient-form">
         <input
             type="text"
             placeholder="e.g oregano"
