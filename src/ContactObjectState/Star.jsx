@@ -11,7 +11,7 @@ export default function Star(props) {
     <button
       onClick={props.handleClick}
       aria-pressed={props.isFilled}
-      aria-label={props.isFilled}
+      aria-label={favoriteLabel}
       className="favorite-button"
       >
       <img
