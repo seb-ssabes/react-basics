@@ -1,19 +1,21 @@
 import React from "react"
 
 export default function App() {
-    const [unreadMessages, setUnreadMessages] = React.useState([])
+    const [messages, setMessages] = React.useState([])
 
-    /**
-     * Challenge:
-     * Only display the <h1> below if there are unread messages
-     */
+    function determineText() {
+      if (messages.length === 0) {
+        return "You're all caught up!"
+      } else if (messages.length === 1) {
+        return "You have 1 unread message!"
+      } else {
+        return `You have ${messages.length} unread messages`
+      }
+    }
 
     return (
         <div>
-            {
-              unreadMessages.length > 0 &&
-              <h1>You have {unreadMessages.length} unread messages!</h1>
-            }
+          <h1>{determineText()}</h1>
         </div>
     )
 }
