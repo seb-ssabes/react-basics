@@ -1,29 +1,25 @@
 import padsData from "./pads"
 import React from "react"
+import Pad from "./Pad"
 
 
-export default function App() {
+export default function App(props) {
   const [pads, setPads] = React.useState(padsData)
 
+  // const styles = {
+  //   backgroundColor: props.darkMode ? "#222222" : "#cccccc"
+  // }
+
   const buttonElements = pads.map(pad => (
-    <button key={pad.id}></button>
+    <Pad color={pad.color} on={pad.on} key={pad.id}/>
   ))
 
 
-    /**
-     * Challenge part 1:
-     * 1. Initialize state with the default value of the
-     *    array pulled in from pads.js
-     * 2. Map over that state array and display each one
-     *    as a <button> (CSS is already written for you)
-     *    (Don't worry about using the "on" or "color"
-     *    properties yet)
-     */
-    return (
-        <main>
-            <div className="pad-container">
-                {buttonElements}
-            </div>
-        </main>
-    )
+  return (
+      <main>
+          <div className="pad-container">
+              {buttonElements}
+          </div>
+      </main>
+  )
 }
