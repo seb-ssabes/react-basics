@@ -24,9 +24,14 @@ export default function Main() {
       .then(data => setMemesArray(data.data.memes))
   }, [])
 
-  useEffect(() => {
-    console.log("memesArray updated:", memesArray)
-  }, [memesArray])
+  function getImage() {
+    const randomNumber = Math.floor(Math.random() * memesArray.length)
+    const newMemeUrl = memesArray[randomNumber].url
+    setMeme(prevMeme => ({
+      ...prevMeme,
+      imageUrl: newMemeUrl
+    }))
+  }
 
   return (
     <main>
@@ -50,7 +55,7 @@ export default function Main() {
                     value={meme.bottomText}
                 />
             </label>
-            <button>Get a new meme image 🖼</button>
+            <button onClick={getImage}>Get a new meme image 🖼</button>
         </div>
         <div className="meme">
             <img src={meme.imageUrl} />
