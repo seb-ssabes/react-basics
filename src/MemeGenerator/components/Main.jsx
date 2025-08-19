@@ -1,4 +1,4 @@
-import {useState} from "react"
+import {useState, useEffect} from "react"
 
 export default function Main() {
   const [meme, setMeme] = useState({
@@ -6,6 +6,8 @@ export default function Main() {
     bottomText: "Walk into Mordor",
     imageUrl: "http://i.imgflip.com/1bij.jpg"
   })
+
+  const [memesArray, setMemesArray] = useState([])
 
   function handleChange(event) {
     const {value, name} = event.currentTarget
@@ -15,6 +17,16 @@ export default function Main() {
     }))
   }
 
+  useEffect(() => {
+    console.log("Side Effect ran!")
+    fetch("https://api.imgflip.com/get_memes")
+      .then(res => res.json())
+      .then(data => setMemesArray(data.data.memes))
+  }, [])
+
+  useEffect(() => {
+    console.log("memesArray updated:", memesArray)
+  }, [memesArray])
 
   return (
     <main>
