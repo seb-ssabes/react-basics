@@ -33,15 +33,19 @@ export default function App() {
   }
 
   function rollDice() {
-    // setDice(generateAllNewDice())
-    setDice(prevDice => prevDice.map(die =>
+    if (!gameWon) {
+
+      setDice(prevDice => prevDice.map(die =>
         die.isHeld
-          ? die
-          : {
-              ...die,
-              value: Math.ceil(Math.random() * 6),
+        ? die
+        : {
+          ...die,
+          value: Math.ceil(Math.random() * 6),
         }
-    ))
+      ))
+    } else {
+      setDice(generateAllNewDice())
+    }
   }
 
   return (
@@ -60,6 +64,9 @@ export default function App() {
       </button>
 
       {gameWon ? <Confetti/> : null}
+      <div aria-live="polite" className="sr-only">
+        {gameWon && <p>Congratulations! You won! Press "New Game" to start again.</p>}
+      </div>
     </main>
   )
 }
