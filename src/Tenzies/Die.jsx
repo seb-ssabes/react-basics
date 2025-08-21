@@ -8,3 +8,4 @@ export default function Die(props) {
     >{props.value}</button>
   )
 }
+   
