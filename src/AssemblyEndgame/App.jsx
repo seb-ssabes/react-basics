@@ -3,19 +3,31 @@ import {languages} from "./languages.js"
 
 export default function AssemblyEndgame() {
   const [currentWord, setCurrentWord] = React.useState("react")
+  const [guessedLetters, setGuessedLetters] = React.useState([])
+
   const alphabet = "abcdefghijklmnopqrstuvwxyz"
+
+  function addGuessedLetter(letter) {
+    setGuessedLetters(prevLetters =>
+      prevLetters.includes(letter) ? prevLetters : [...prevLetters, letter]
+    )
+  }
 
   const word = currentWord.split("").map((letter, index) => (
     <span key={index}>{letter.toUpperCase()}</span>
   ))
 
-  const keyboardElements = alphabet.split("").map((letter) =>(
-    <button key={letter}>{letter.toUpperCase()}</button>
+  const keyboardElements = alphabet.split("").map(letter =>(
+    <button
+      key={letter}
+      onClick={() => addGuessedLetter(letter)}
+    >
+      {letter.toUpperCase()}
+    </button>
   ))
 
+  console.log(guessedLetters)
 
-
-  console.log(keyboardElements)
 
   const languageElements = languages.map(lang => {
     const styles = {
@@ -53,7 +65,7 @@ export default function AssemblyEndgame() {
       <section className="keyboard">
         {keyboardElements}
       </section>
-      <button className="">New Game</button>
+      <button className="new-game">New Game</button>
     </main>
   )
 }
