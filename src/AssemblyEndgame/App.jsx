@@ -1,12 +1,17 @@
 import React from "react"
 import {languages} from "./languages.js"
-import {clsx} from "clsx"
+import clsx from "clsx"
 
 export default function AssemblyEndgame() {
+  // state values
   const [currentWord, setCurrentWord] = React.useState("react")
   const [guessedLetters, setGuessedLetters] = React.useState([])
 
+  // static values
   const alphabet = "abcdefghijklmnopqrstuvwxyz"
+
+  // derived values
+  const wrongGuessCount = guessedLetters.filter(letter => !currentWord.includes(letter)).length
 
   function addGuessedLetter(letter) {
     setGuessedLetters(prevLetters =>
@@ -29,9 +34,6 @@ export default function AssemblyEndgame() {
       wrong: isWrong
     })
 
-    console.log(className)
-
-
     return (
       <button
         className={className}
@@ -43,19 +45,18 @@ export default function AssemblyEndgame() {
     )
   })
 
-  console.log(guessedLetters)
-
-
-  const languageElements = languages.map(lang => {
+  const languageElements = languages.map((lang, index) => {
+    const isLanguageLost = index < wrongGuessCount
     const styles = {
       backgroundColor: lang.backgroundColor,
-      color: lang.color,
+      color: lang.color
     }
+    const className = clsx("chip", isLanguageLost && "lost")
 
     return (
       <span
         key={lang.name}
-        className="chip"
+        className={className}
         style={styles}
       >
         {lang.name}

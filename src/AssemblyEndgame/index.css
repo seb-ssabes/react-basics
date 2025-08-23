@@ -27,6 +27,7 @@ header > p {
   font-size: 0.875rem;
   max-width: 350px;
   color: #8e8e8e;
+  margin: 0 auto;
 }
 
 section.game-status {
@@ -54,12 +55,27 @@ section.language-chips {
   gap: 5px;
   justify-content: center;
   max-width: 350px;
-  margin-bottom: 36px;
+  margin: 0 auto 36px auto;
 }
 
 span.chip {
   border-radius: 3px;
   padding: 4.5px;
+  position: relative;
+}
+
+span.chip.lost::before {
+  content: "💀";
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  font-size: 0.85rem;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 section.word {
