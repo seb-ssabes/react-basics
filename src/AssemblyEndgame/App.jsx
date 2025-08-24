@@ -12,6 +12,10 @@ export default function AssemblyEndgame() {
 
   // derived values
   const wrongGuessCount = guessedLetters.filter(letter => !currentWord.includes(letter)).length
+  const isGameWon =
+    currentWord.split("").every(letter => guessedLetters.includes(letter))
+  const isGameLost = wrongGuessCount >= languages.length - 1
+  const isGameOver = isGameWon || isGameLost
 
   function addGuessedLetter(letter) {
     setGuessedLetters(prevLetters =>
@@ -64,6 +68,7 @@ export default function AssemblyEndgame() {
     )
   })
 
+
   return (
     <main>
       <header>
@@ -83,7 +88,7 @@ export default function AssemblyEndgame() {
       <section className="keyboard">
         {keyboardElements}
       </section>
-      <button className="new-game">New Game</button>
+      {isGameOver && <button className="new-game">New Game</button>}
     </main>
   )
 }
