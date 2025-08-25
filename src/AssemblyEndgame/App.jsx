@@ -1,6 +1,7 @@
 import React from "react"
 import {languages} from "./languages.js"
 import clsx from "clsx"
+import {getFarewellText} from "./utils.js"
 
 export default function AssemblyEndgame() {
   // state values
@@ -16,6 +17,8 @@ export default function AssemblyEndgame() {
     currentWord.split("").every(letter => guessedLetters.includes(letter))
   const isGameLost = wrongGuessCount >= languages.length - 1
   const isGameOver = isGameWon || isGameLost
+  const lastGuessedLetter = guessedLetters[guessedLetters.length - 1]
+  const isLastGuessIncorrect = lastGuessedLetter && !currentWord.includes(lastGuessedLetter)
 
   function addGuessedLetter(letter) {
     setGuessedLetters(prevLetters =>
@@ -68,6 +71,38 @@ export default function AssemblyEndgame() {
     )
   })
 
+  const gameStatusClass = clsx("game-status", {
+    won: isGameWon,
+    lose: isGameLost,
+    farewell: !isGameOver && isLastGuessIncorrect
+  })
+
+  function renderGameStatus() {
+    if (!isGameOver && isLastGuessIncorrect) {
+      return (
+        <p className="farewell-message">
+          {getFarewellText(languages[wrongGuessCount - 1].name)}
+        </p>
+      )
+    }
+    if (isGameWon) {
+      return (
+        <>
+          <h2>You win!</h2>
+          <p>Well done!</p>
+        </>
+      )
+    }
+    if (isGameLost){
+      return (
+        <>
+          <h2>Game over!</h2>
+          <p>You lose! Better start learning Assembly</p>
+        </>
+      )
+    }
+    return null
+  }
 
   return (
     <main>
@@ -75,9 +110,8 @@ export default function AssemblyEndgame() {
         <h1>Assembly: Endgame</h1>
         <p>Guess the word in under 8 attempts to keep the programming world safe from Assembly!</p>
       </header>
-      <section className="game-status">
-        <h2>You win!</h2>
-        <p>Well done!</p>
+      <section className={gameStatusClass}>
+        {renderGameStatus()}
       </section>
       <section className="language-chips">
         {languageElements}
